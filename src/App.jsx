@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export class App extends Component {
   state = {
     board: [
-      ['3', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -14,6 +14,22 @@ export class App extends Component {
     ],
   }
 
+  handleNewGame = async () => {
+    const body = { difficulty: 0 }
+
+    const response = await fetch(
+      `https://minesweeper-api.herokuapp.com/games`,
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body),
+      }
+    )
+
+    const game = await response.json()
+    this.setState(game)
+  }
+
   render() {
     const grid = this.state.board.map((row, rowIndex) => {
       return row.map((cell, colIndex) => {
@@ -22,10 +38,11 @@ export class App extends Component {
     })
 
     return (
-      <div>
+      <main>
         <h1>Minesweeper</h1>
+        <button onClick={this.handleNewGame}>New Easy Game</button>
         <ul>{grid}</ul>
-      </div>
+      </main>
     )
   }
 }
