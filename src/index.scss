@@ -1,7 +1,31 @@
 :root {
   font: 16px / 1 sans-serif;
-}
 
+  --cell-size: 3rem;
+  --board-size: 8;
+}
 html {
   height: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), 1fr);
+  grid-template-rows: repeat(var(--board-size), 1fr);
+  width: calc(var(--board-size) * var(--cell-size));
+  height: calc(var(--board-size) * var(--cell-size));
+}
+
+li {
+  margin: 0;
+  padding: 0.5;
+  background-color: grey;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
