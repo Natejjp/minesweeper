@@ -62,6 +62,19 @@ export class App extends Component {
     this.setState(game)
   }
 
+  replaceBackground = cell => {
+    switch (cell) {
+      case 'F':
+        return 'cell-flag'
+      case '*':
+        return 'cell-bomb'
+      case '_':
+        return 'cell-free'
+      default:
+        return 'cell-number'
+    }
+  }
+
   replaceElements = cell => {
     switch (cell) {
       case 'F':
@@ -90,6 +103,7 @@ export class App extends Component {
                   onContextMenu={() =>
                     this.handleRightClickCell(event, rowIndex, colIndex)
                   }
+                  className={this.replaceBackground(cell)}
                 >
                   {this.replaceElements(cell)}
                 </li>

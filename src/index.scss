@@ -35,3 +35,19 @@ li {
   justify-content: center;
   color: white;
 }
+
+li.cell-number {
+  color: white;
+}
+
+li.cell-bomb {
+  background-color: red;
+}
+
+li.cell-flag {
+  background-color: yellow;
+}
+
+li.cell-free {
+  background-color: green;
+}
