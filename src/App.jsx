@@ -93,6 +93,7 @@ export class App extends Component {
         <h1>Minesweeper</h1>
         <button onClick={this.handleNewGame}>New Easy Game</button>
         <h2>Game: {this.state.id}</h2>
+        <h3>{this.state.state}</h3>
         <ul>
           {this.state.board.map((row, rowIndex) => {
             return row.map((cell, colIndex) => {
