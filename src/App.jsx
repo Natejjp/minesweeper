@@ -45,7 +45,9 @@ export class App extends Component {
     this.setState(game)
   }
 
-  handleRightClickCell = async (rowIndex, colIndex) => {
+  handleRightClickCell = async (event, rowIndex, colIndex) => {
+    event.preventDefault()
+
     const body = { row: rowIndex, col: colIndex }
 
     const response = await fetch(
@@ -60,11 +62,24 @@ export class App extends Component {
     this.setState(game)
   }
 
+  replaceElements = cell => {
+    switch (cell) {
+      case 'F':
+        return '🚩'
+      case '*':
+        return '💣'
+      case '_':
+        return '_'
+      default:
+        return cell
+    }
+  }
   render() {
     return (
       <main>
         <h1>Minesweeper</h1>
         <button onClick={this.handleNewGame}>New Easy Game</button>
+        <h2>Game: {this.state.id}</h2>
         <ul>
           {this.state.board.map((row, rowIndex) => {
             return row.map((cell, colIndex) => {
@@ -73,10 +88,10 @@ export class App extends Component {
                   key={colIndex}
                   onClick={() => this.handleClickCell(rowIndex, colIndex)}
                   onContextMenu={() =>
-                    this.handleRightClickCell(rowIndex, colIndex)
+                    this.handleRightClickCell(event, rowIndex, colIndex)
                   }
                 >
-                  {cell}
+                  {this.replaceElements(cell)}
                 </li>
               )
             })
